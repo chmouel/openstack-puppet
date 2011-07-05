@@ -75,11 +75,12 @@ class dash::install {
     ]
   }
 
-  exec { "dashboard.sqlite3",
-    command => "sqlite3 /var/lib/dash/local/dashboard_openstack.sqlite3 .exit",
+  exec { "dashboard.sqlite3":
+    command => "sqlite3 /var/lib/dash/local/dashboard_openstack.sqlite3 'create table t(id)'",
+    path => "/usr/bin:/bin"
   }
 
-  file { "/var/lib/dash/local/dashboard_openstack.sqlite3"
+  file { "/var/lib/dash/local/dashboard_openstack.sqlite3":
     ensure => present,
     owner => "www-data",
     mode => 0600,
