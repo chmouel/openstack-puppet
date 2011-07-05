@@ -2,7 +2,8 @@ class glance::install {
   $glance_packages = [ "glance", "python-glance" ]
 
   package { $glance_packages:
-    ensure => present
+    ensure => present,
+    require => Apt::Source["rcb"]
   }
 
   file { "/var/log/glance":

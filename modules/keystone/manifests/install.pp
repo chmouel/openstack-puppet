@@ -1,7 +1,8 @@
 class keystone::install {
 
   package { "keystone":
-    ensure => present
+    ensure => present,
+    require => Apt::Source["rcb"]
   }
 
   file { "/var/log/keystone":
