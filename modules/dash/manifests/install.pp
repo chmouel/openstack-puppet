@@ -75,6 +75,19 @@ class dash::install {
     ]
   }
 
+  exec { "dashboard.sqlite3",
+    command => "sqlite3 /var/lib/dash/local/dashboard_openstack.sqlite3 .exit",
+  }
+
+  file { "/var/lib/dash/local/dashboard_openstack.sqlite3"
+    ensure => present,
+    owner => "www-data",
+    mode => 0600,
+    require => [
+        Exec["dashboard.sqlite3"]
+    ]
+  }
+
   exec { "dash-db":
     command => "python /var/lib/dash/dashboard/manage.py syncdb",
     user => "www-data",
@@ -82,7 +95,8 @@ class dash::install {
     unless => "test -f /var/lib/dash/local/dashboard_openstack.sqlite3",
     require => [
       Package["openstack-dashboard"],
-      File["local_settings.py"]
+      File["local_settings.py"],
+      File["/var/lib/dash/local/dashboard_openstack.sqlite3"]
     ]
   }
 }
