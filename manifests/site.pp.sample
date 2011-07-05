@@ -23,6 +23,11 @@ import "sitedefs.pp"
 # $mysql_vip = "127.0.0.1"
 # $api_vip = "127.0.0.1"
 # $rabbitmq_vip = "127.0.0.1"
+# $glance_vip = "127.0.0.1"
+# $vncproxy_host = "127.0.0.1"
+# $site_branding = "RadioEdit!"
+# $cloudkick_key = ""
+# $cloudkick_secret = ""
 #
 #
 #node default {
